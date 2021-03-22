@@ -31,5 +31,6 @@ return [
     'Laminas\Validator',
     'Laminas\DeveloperTools',
     'Cliente',
+    'Administrador',
     'Application',
 ];
