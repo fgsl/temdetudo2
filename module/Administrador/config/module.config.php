@@ -21,8 +21,13 @@ return [
         ],
     ],
     'controllers' => [
+        'aliases' => [
+            'index' => Controller\IndexController::class,
+            'produto' => Controller\ProdutoController::class
+        ],
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
+            Controller\ProdutoController::class => InvokableFactory::class
         ],
     ],
     'view_manager' => [
