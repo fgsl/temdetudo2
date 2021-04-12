@@ -13,5 +13,9 @@
  */
 
 return [
-    // ...
+    'service_manager' => [
+        'factories' => [
+            'DbAdapter' => Laminas\Db\Adapter\AdapterServiceFactory
+        ]
+    ]  
 ];

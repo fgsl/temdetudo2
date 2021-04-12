@@ -4,6 +4,8 @@ namespace Administrador;
 
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\Router\Http\Segment;
+use Administrador\Model\ProdutoTable;
+use Administrador\Model\ProdutoTableFactory;
 
 return [
     'router' => [
@@ -18,6 +20,16 @@ return [
                     ],
                 ],
             ],
+            'produto' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/produto[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\ProdutoController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],            
         ],
     ],
     'controllers' => [
@@ -43,5 +55,8 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    'service_manager' => [
+        ProdutoTable::class => ProdutoTableFactory::class        
+    ]
 ];
 
