@@ -15,7 +15,7 @@
 return [
     'service_manager' => [
         'factories' => [
-            'DbAdapter' => Laminas\Db\Adapter\AdapterServiceFactory
+            'DbAdapter' => Laminas\Db\Adapter\AdapterServiceFactory::class
         ]
     ]  
 ];

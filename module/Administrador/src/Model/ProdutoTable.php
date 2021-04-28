@@ -1,6 +1,8 @@
 <?php
 namespace Administrador\Model;
 
+use Laminas\Db\TableGateway\TableGatewayInterface;
+
 class ProdutoTable {
     /** @var TableGatewayInterface **/    
     private $tableGateway;

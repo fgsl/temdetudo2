@@ -6,6 +6,7 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\Router\Http\Segment;
 use Administrador\Model\ProdutoTable;
 use Administrador\Model\ProdutoTableFactory;
+use Administrador\Controller\ProdutoControllerFactory;
 
 return [
     'router' => [
@@ -39,7 +40,7 @@ return [
         ],
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
-            Controller\ProdutoController::class => InvokableFactory::class
+            Controller\ProdutoController::class => ProdutoControllerFactory::class
         ],
     ],
     'view_manager' => [
@@ -56,7 +57,9 @@ return [
         ],
     ],
     'service_manager' => [
-        ProdutoTable::class => ProdutoTableFactory::class        
+        'factories' => [
+            ProdutoTable::class => ProdutoTableFactory::class
+         ]        
     ]
 ];
 

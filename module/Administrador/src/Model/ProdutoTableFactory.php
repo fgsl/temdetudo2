@@ -1,5 +1,5 @@
 <?php
-namespace Administrador\Produto;
+namespace Administrador\Model;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;

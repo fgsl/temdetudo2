@@ -23,7 +23,7 @@ class ProdutoController extends AbstractActionController{
     public function editAction()
     {
         $form = new Produto();
-        $action = $this->url('produto',['action' => 'save']);
+        $action = $this->url()->fromRoute('produto',['action' => 'save']);
         $form->setAttribute('action',$action);
     
         return new ViewModel([
@@ -36,5 +36,12 @@ class ProdutoController extends AbstractActionController{
         $codigo = $this->getRequest()->getPost('codigo');
         $nome = $this->getRequest()->getPost('nome');
         $preco = $this->getRequest()->getPost('preco');
+        
+        
+        $this->produtoTable->save([
+            'nome' => $nome,
+            'preco' => $preco
+        ]);
+        return $this->redirect()->toRoute('produto');
     }
 }
