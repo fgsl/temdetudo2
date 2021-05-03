@@ -20,4 +20,9 @@ class ProdutoTable {
             error_log($e->getMessage());
         }
     }
+    
+    public function getAll()
+    {
+        return $this->tableGateway->select();
+    }
 }

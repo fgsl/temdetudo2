@@ -17,7 +17,10 @@ class ProdutoController extends AbstractActionController{
 
     public function indexAction()
     {
-        return new ViewModel();
+        $produtos = $this->produtoTable->getAll();
+        return new ViewModel([
+            'produtos' => $produtos
+        ]);
     }
     
     public function editAction()
