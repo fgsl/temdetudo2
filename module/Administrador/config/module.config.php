@@ -6,7 +6,10 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\Router\Http\Segment;
 use Administrador\Model\ProdutoTable;
 use Administrador\Model\ProdutoTableFactory;
+use Administrador\Model\UsuarioTable;
+use Administrador\Model\UsuarioTableFactory;
 use Administrador\Controller\ProdutoControllerFactory;
+use Administrador\Controller\UsuarioControllerFactory;
 
 return [
     'router' => [
@@ -30,17 +33,29 @@ return [
                         'action'     => 'index',
                     ],
                 ],
-            ],            
+            ],
+            'usuario' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/usuario[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\UsuarioController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],                        
         ],
     ],
     'controllers' => [
         'aliases' => [
             'index' => Controller\IndexController::class,
-            'produto' => Controller\ProdutoController::class
+            'produto' => Controller\ProdutoController::class,
+            'usuario' => Controller\UsuarioController::class
         ],
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
-            Controller\ProdutoController::class => ProdutoControllerFactory::class
+            Controller\ProdutoController::class => ProdutoControllerFactory::class,
+            Controller\UsuarioController::class => UsuarioControllerFactory::class             
         ],
     ],
     'view_manager' => [
@@ -58,7 +73,8 @@ return [
     ],
     'service_manager' => [
         'factories' => [
-            ProdutoTable::class => ProdutoTableFactory::class
+            ProdutoTable::class => ProdutoTableFactory::class,
+            UsuarioTable::class => UsuarioTableFactory::class
          ]        
     ]
 ];

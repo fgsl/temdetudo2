@@ -1,0 +1,5 @@
+<h1>Incluir Usuario</h1>
+<?php
+$form = $this->form; // $form é variável local, $this->form é variável passada pelo controlador
+$form->prepare();
+echo $this->form($form); // o método form() renderiza o objeto da classe Form
