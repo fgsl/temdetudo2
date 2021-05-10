@@ -16,6 +16,16 @@ class Produto {
     
     public function toArray()
     {
-        return get_object_vars($this);
-    }    
+        $attributes = get_object_vars($this);
+        unset($attributes['codigo']);
+        return $attributes;
+    }
+    
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);    
+    }
+    
+    
+        
 }

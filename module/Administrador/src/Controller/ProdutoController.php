@@ -51,4 +51,18 @@ class ProdutoController extends AbstractActionController{
         
         return $this->redirect()->toRoute('produto');
     }
+    
+    public function deleteAction()
+    {
+        $key = $this->params('key');
+
+        $this->produtoTable->delete($key);
+        
+        return $this->redirect()->toRoute('produto');        
+    }
+    
+    
+    
+    
+    
 }
