@@ -27,7 +27,7 @@ return [
             'produto' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/produto[/:action]',
+                    'route'    => '/produto[/:action[/:key]]',
                     'defaults' => [
                         'controller' => Controller\ProdutoController::class,
                         'action'     => 'index',

@@ -3,7 +3,8 @@ namespace Administrador\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
-use Administrador\Form\Produto;
+use Administrador\Form\Produto as ProdutoForm;
+use Administrador\Model\Produto;
 use Administrador\Model\ProdutoTable;
 
 class ProdutoController extends AbstractActionController{
@@ -25,7 +26,15 @@ class ProdutoController extends AbstractActionController{
     
     public function editAction()
     {
-        $form = new Produto();
+        $key = $this->params('key');
+       
+        $produto = new Produto(); 
+        if (!empty($key)){
+            $produto = $this->produtoTable->getOne($key);
+        } 
+    
+        $form = new ProdutoForm();
+        $form->bind($produto);
         $action = $this->url()->fromRoute('produto',['action' => 'save']);
         $form->setAttribute('action',$action);
     
@@ -36,15 +45,10 @@ class ProdutoController extends AbstractActionController{
     
     public function saveAction()
     {
-        $codigo = $this->getRequest()->getPost('codigo');
-        $nome = $this->getRequest()->getPost('nome');
-        $preco = $this->getRequest()->getPost('preco');
+        $produto = new Produto($this->getRequest());        
         
+        $this->produtoTable->save($produto);
         
-        $this->produtoTable->save([
-            'nome' => $nome,
-            'preco' => $preco
-        ]);
         return $this->redirect()->toRoute('produto');
     }
 }

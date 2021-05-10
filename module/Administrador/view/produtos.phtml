@@ -1,5 +1,13 @@
 <tr>
-<td><?=$this->codigo?><td>
-<td><?=$this->nome?><td>
-<td><?=$this->preco?><td>
+<td><a href="<?=$this->url('produto',[
+'action'    => 'edit',
+'key'       => $this->codigo
+])?>"><?=$this->codigo?></a>
+</td>
+<td><?=$this->nome?></td>
+<td><?=$this->preco?></td>
+<td><a href="<?=$this->url('produto',[
+'action'    => 'delete',
+'key'       => $this->codigo
+])?>">X</a></td>
 </tr>

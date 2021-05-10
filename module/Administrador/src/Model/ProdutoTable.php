@@ -12,10 +12,14 @@ class ProdutoTable {
         $this->tableGateway = $tableGateway;
     }
     
-    public function save(array $data)
+    public function save(Produto $produto)
     {
         try {
-            $this->tableGateway->insert($data);
+            if (empty($produto->codigo)){
+                $this->tableGateway->insert($produto->toArray());
+            } else {
+                $this->tableGateway->update($produto->toArray(), ['codigo' => $produto->codigo]);            
+            }
         } catch( \Exception $e) {
             error_log($e->getMessage());
         }
@@ -24,5 +28,10 @@ class ProdutoTable {
     public function getAll()
     {
         return $this->tableGateway->select();
+    }
+    
+    public function getOne($key)
+    {
+        return $this->tableGateway->select(['codigo' => $key])->current();
     }
 }
