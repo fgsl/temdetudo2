@@ -1,0 +1,17 @@
+<?php
+/**
+@var Laminas\View\Renderer\PhpRenderer
+**/
+?>
+<h1>Módulo Administrativo</h1>
+
+<ul>
+<li><a href="<?=$this->url('admin',['controller' => 'produto'])?>">Cadastro de Produtos</a></li>
+<li><a href="<?=$this->url('admin',['controller' => 'usuario'])?>">Cadastro de Usuários</a></li>
+</ul>
+<p>
+<a href="<?=$this->url('admin',[
+    'controller' => 'index',
+    'action'     => 'logout'
+])?>">Sair</a>
+</p>

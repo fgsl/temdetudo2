@@ -5,7 +5,10 @@
 ?>
 <h1>Módulo Administrativo</h1>
 
-<ul>
-<li><a href="<?=$this->url('admin',['controller' => 'produto'])?>">Cadastro de Produtos</a></li>
-<li><a href="<?=$this->url('admin',['controller' => 'usuario'])?>">Cadastro de Usuários</a></li>
-</ul>
+<form method="post" action="<?=$this->url('admin',[
+'controller' =>'index',
+'action' => 'login'
+])?>">
+Usuário: <input type="text" name="nome"></br>
+Senha: <input type="password" name="senha"></br>
+<input type="submit" value="login">

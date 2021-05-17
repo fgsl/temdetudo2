@@ -40,8 +40,6 @@ return [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
         'template_map' => [
             'cliente/index/index' => __DIR__ . '/../view/cliente/index/index.phtml',
             'cliente/layout'      => __DIR__ . '/../view/cliente/layout/index.phtml',
