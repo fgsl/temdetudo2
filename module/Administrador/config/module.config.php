@@ -53,7 +53,7 @@ return [
             'usuario' => Controller\UsuarioController::class
         ],
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+            Controller\IndexController::class => Controller\IndexControllerFactory::class,
             Controller\ProdutoController::class => ProdutoControllerFactory::class,
             Controller\UsuarioController::class => UsuarioControllerFactory::class             
         ],
