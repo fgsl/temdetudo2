@@ -4,10 +4,21 @@ namespace Cliente;
 
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\Router\Http\Segment;
+use Laminas\Router\Http\Literal;
 
 return [
     'router' => [
         'routes' => [
+            'home' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action' => 'index'
+                    ]
+                ]
+            ],
             'cliente' => [
                 'type'    => Segment::class,
                 'options' => [
@@ -32,7 +43,8 @@ return [
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => [
-            'application/index/index' => __DIR__ . '/../view/cliente/index/index.phtml',
+            'cliente/index/index' => __DIR__ . '/../view/cliente/index/index.phtml',
+            'cliente/layout'      => __DIR__ . '/../view/cliente/layout/index.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
