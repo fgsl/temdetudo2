@@ -10,8 +10,16 @@ declare(strict_types=1);
 
 namespace Administrador;
 
+use Laminas\Session\SessionManager;
+
 class Module
 {
+    public function __construct()
+    {
+        $sessionManager = new SessionManager();
+        $sessionManager->start();
+    }
+    
     public function getConfig() : array
     {
         return include __DIR__ . '/../config/module.config.php';

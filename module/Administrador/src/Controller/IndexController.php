@@ -4,6 +4,8 @@ namespace Administrador\Controller;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;
+use Laminas\Authentication\AuthenticationService;
 
 class IndexController extends AbstractActionController{
     /** @var AdapterInterface **/
@@ -21,18 +23,47 @@ class IndexController extends AbstractActionController{
     
     public function menuAction()
     {
+        $authenticator = new AuthenticationService();
+        if (!$authenticator->hasIdentity()){
+            return $this->logoutAction();
+        }
+        
         return new ViewModel();
     }
     
     public function loginAction()
     {
-        return $this->redirect()->toRoute('admin',[
-        'controller' => 'index',
-        'action' => 'menu']);
+        $authAdapter = new AuthAdapter($this->adapter);
+        
+        $authAdapter
+        ->setTableName('usuarios')
+        ->setIdentityColumn('nome')
+        ->setCredentialColumn('senha');
+        
+        $identity = $this->request->getPost('nome');
+        $authAdapter->setIdentity($identity);
+        $credential = $this->request->getPost('senha');
+        $authAdapter->setCredential($credential);
+        
+        $result = $authAdapter->authenticate();
+        
+        if ($result->isValid()){
+            $user = $authAdapter->getResultRowObject(null,'senha');
+            $authenticator = new AuthenticationService();
+            $authenticator->getStorage()->write($user);
+            
+            return $this->redirect()->toRoute('admin',[
+                'controller' => 'index',
+                'action' => 'menu']);
+        }
+        return $this->logoutAction();
     }
     
     public function logoutAction()
     {
+        $authenticator = new AuthenticationService();
+        $authenticator->clearIdentity();
+        
         return $this->redirect()->toRoute('admin');
     }  
 }

@@ -13,4 +13,11 @@
  */
 
 return [
+    'db' => [
+        'driver'    => '',
+        'database'  => '',
+        'username'  => '',
+        'password'  => '',
+        'hostname'  => ''
+    ]
 ];
