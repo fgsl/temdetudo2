@@ -5,11 +5,12 @@
 <table>
 <thead>
 <tr>
-<th>Nome:</th>
-<th>Senha:</th>
-<th>Codigo_papel</th>
+<th>Código</th>
+<th>Nome</th>
+<th>Papel</th>
 </tr>
 </thead>
 <tbody>
+<?=$this->partialLoop('usuarios.phtml',$this->usuarios)?>
 </tbody>
 </table>

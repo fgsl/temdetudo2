@@ -6,6 +6,7 @@ use Laminas\View\Model\ViewModel;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;
 use Laminas\Authentication\AuthenticationService;
+use Administrador\Model\Usuario;
 
 class IndexController extends AbstractActionController{
     /** @var AdapterInterface **/
@@ -43,7 +44,7 @@ class IndexController extends AbstractActionController{
         $identity = $this->request->getPost('nome');
         $authAdapter->setIdentity($identity);
         $credential = $this->request->getPost('senha');
-        $authAdapter->setCredential($credential);
+        $authAdapter->setCredential(Usuario::criptografar($credential));
         
         $result = $authAdapter->authenticate();
         

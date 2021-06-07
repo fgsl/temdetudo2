@@ -1,23 +1,29 @@
 <?php
 namespace Administrador\Model;
 
-use Laminas\Db\TableGateway\TableGatewayInterface;
+use Laminas\Db\Sql\Select;
 
-class UsuarioTable {
-    /** @var TableGatewayInterface **/    
-    private $tableGateway;
-
-    public function __construct(TableGatewayInterface $tableGateway)
-    {
-        $this->tableGateway = $tableGateway;
-    }
-    
-    public function save(array $data)
+class UsuarioTable extends AbstractTable {
+    public function save(Usuario $usuario)
     {
         try {
-            $this->tableGateway->insert($data);
+            if (empty($produto->codigo)){
+                error_log('inclusão de usuário');
+                $this->tableGateway->insert($usuario->toArray());
+            } else {
+                error_log('alteração de usuário ' . $usuario->codigo);
+                $this->tableGateway->update($usuario->toArray(), ['codigo' => $usuario->codigo]);
+            }
         } catch( \Exception $e) {
             error_log($e->getMessage());
         }
+    }
+    
+    public function getAll()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->join('papeis','papeis.codigo = usuarios.codigo_papel',['papel' => 'nome']);
+        
+        return $this->tableGateway->selectWith($select);
     }
 }
