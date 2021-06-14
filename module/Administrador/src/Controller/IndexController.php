@@ -23,12 +23,7 @@ class IndexController extends AbstractActionController{
     }
     
     public function menuAction()
-    {
-        $authenticator = new AuthenticationService();
-        if (!$authenticator->hasIdentity()){
-            return $this->logoutAction();
-        }
-        
+    {        
         return new ViewModel();
     }
     
