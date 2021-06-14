@@ -1,5 +1,5 @@
 <?php
-namespace module\Administrador\src\Model;
+namespace Administrador\Model;
 
 abstract class AbstractModel
 {
